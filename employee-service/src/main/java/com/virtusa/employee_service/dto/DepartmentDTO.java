@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 public class DepartmentDTO {
 
-    private Long deptId;
+//    private Long deptId;
     private String deptName;
 
 }

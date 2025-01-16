@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface DepartmentFeignClient {
 
     @GetMapping("/api/departments/{id}")
-    public DepartmentDTO getDeptByID(@PathVariable("id") Long id);
+    DepartmentDTO getDeptByID(@PathVariable("id") Long id);
 
 }

@@ -1,4 +1,4 @@
-package com.virtusa.department_service.feingClient;
+package com.virtusa.department_service.feignClient;
 
 import com.virtusa.department_service.dto.EmployeeDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -11,9 +11,7 @@ import java.util.List;
 @FeignClient(name = "employee-service")
 public interface EmployeeFeignClient {
 
-//    @GetMapping("/{id}")
-//    EmployeeDTO getEmployeeById(@PathVariable Long id);
-
-    @GetMapping("/byDeptId/{deptId}")
+    @GetMapping("/api/employees/byDeptId/{deptId}")
     ResponseEntity<List<EmployeeDTO>> getEmployeesByDeptId(@PathVariable("deptId") Long deptId);
+
 }

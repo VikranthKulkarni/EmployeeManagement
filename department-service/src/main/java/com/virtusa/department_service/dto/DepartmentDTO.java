@@ -19,6 +19,5 @@ public class DepartmentDTO {
 
     private Long deptId;
     private String deptName;
-    private List<EmployeeDTO> employees;
 
 }

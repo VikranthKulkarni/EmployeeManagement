@@ -2,7 +2,11 @@ package com.virtusa.department_service.dao;
 
 import com.virtusa.department_service.dto.DepartmentDTO;
 import com.virtusa.department_service.dto.EmployeeDTO;
-import com.virtusa.department_service.feingClient.EmployeeFeignClient;
+import com.virtusa.department_service.dto.ManagerDTO;
+import com.virtusa.department_service.dto.ProjectDTO;
+import com.virtusa.department_service.feignClient.EmployeeFeignClient;
+import com.virtusa.department_service.feignClient.ManagerFeignClient;
+import com.virtusa.department_service.feignClient.ProjectFeignClient;
 import com.virtusa.department_service.model.Department;
 import com.virtusa.department_service.repository.DepartmentRepo;
 import org.springframework.stereotype.Component;
@@ -15,11 +19,15 @@ public class DepartmentDAO {
 
     private final DepartmentRepo departmentRepo;
     private final EmployeeFeignClient employeeFeignClient;
+    private final ManagerFeignClient managerFeignClient;
+    private final ProjectFeignClient projectFeignClient;
 
 
-    public DepartmentDAO(DepartmentRepo departmentRepo, EmployeeFeignClient employeeFeignClient) {
+    public DepartmentDAO(DepartmentRepo departmentRepo, EmployeeFeignClient employeeFeignClient, ManagerFeignClient managerFeignClient, ProjectFeignClient projectFeignClient) {
         this.departmentRepo = departmentRepo;
         this.employeeFeignClient = employeeFeignClient;
+        this.managerFeignClient = managerFeignClient;
+        this.projectFeignClient = projectFeignClient;
     }
 
     public DepartmentDTO saveDept(DepartmentDTO departmentDTO){
@@ -47,6 +55,18 @@ public class DepartmentDAO {
         } else {
             throw new IllegalArgumentException("Department not found with id : " + departmentDTO.getDeptId());
         }
+    }
+
+    public List<EmployeeDTO> findEmployeesByDeptId(Long deptId){
+        return employeeFeignClient.getEmployeesByDeptId(deptId).getBody();
+    }
+
+    public List<ManagerDTO> getManagersByDeptId(Long deptId){
+        return managerFeignClient.getManagersByDeptId(deptId).getBody();
+    }
+
+    public List<ProjectDTO> getProjectsByDeptId(Long deptId){
+        return projectFeignClient.getProjectsByDeptId(deptId).getBody();
     }
 
     public void deleteDept(Long id) {

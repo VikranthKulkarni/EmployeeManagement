@@ -37,4 +37,10 @@ public class Employee {
     @Column(nullable = false)
     private Long deptId;
 
+    @Column(nullable = false)
+    private Long managerId;
+
+    @Column(nullable = false)
+    private Long projectId;
+
 }

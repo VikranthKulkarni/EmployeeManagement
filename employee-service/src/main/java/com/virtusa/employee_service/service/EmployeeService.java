@@ -39,4 +39,12 @@ public class EmployeeService {
     public List<EmployeeDTO> getEmployeesByDeptId(Long deptId){
         return employeeDAO.getEmployeesByDeptId(deptId);
     }
+
+    public List<EmployeeDTO> getEmployeesByManagerId(Long managerId){
+        return employeeDAO.getEmployeesByManagerId(managerId);
+    }
+
+    public List<EmployeeDTO> getEmployeesByProjectId(Long projectId){
+        return employeeDAO.getEmployeesByProjectId(projectId);
+    }
 }

@@ -2,6 +2,9 @@ package com.virtusa.department_service.service;
 
 import com.virtusa.department_service.dao.DepartmentDAO;
 import com.virtusa.department_service.dto.DepartmentDTO;
+import com.virtusa.department_service.dto.EmployeeDTO;
+import com.virtusa.department_service.dto.ManagerDTO;
+import com.virtusa.department_service.dto.ProjectDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +37,18 @@ public class DepartmentService {
 
     public void deleteDept(Long id){
         departmentDAO.deleteDept(id);
+    }
+
+    public List<EmployeeDTO> findEmployeesByDeptId(Long deptId){
+        return departmentDAO.findEmployeesByDeptId(deptId);
+    }
+
+    public List<ManagerDTO> getManagersByDeptId(Long deptId){
+        return departmentDAO.getManagersByDeptId(deptId);
+    }
+
+    public List<ProjectDTO> getProjectsByDeptId(Long deptId){
+        return departmentDAO.getProjectsByDeptId(deptId);
     }
 
 }

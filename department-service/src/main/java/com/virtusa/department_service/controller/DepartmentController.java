@@ -1,6 +1,9 @@
 package com.virtusa.department_service.controller;
 
 import com.virtusa.department_service.dto.DepartmentDTO;
+import com.virtusa.department_service.dto.EmployeeDTO;
+import com.virtusa.department_service.dto.ManagerDTO;
+import com.virtusa.department_service.dto.ProjectDTO;
 import com.virtusa.department_service.service.DepartmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +49,24 @@ public class DepartmentController {
     public ResponseEntity<Void> deleteDept(@PathVariable Long id){
         departmentService.deleteDept(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("employeesByDept/{deptId}")
+    public ResponseEntity<List<EmployeeDTO>> findEmployeesByDept(@PathVariable Long deptId){
+        List<EmployeeDTO> employees = departmentService.findEmployeesByDeptId(deptId);
+        return ResponseEntity.ok(employees);
+    }
+
+    @GetMapping("/managers/{deptId}")
+    public ResponseEntity<List<ManagerDTO>> getManagersByDeptId(@PathVariable Long deptId){
+        List<ManagerDTO> managers = departmentService.getManagersByDeptId(deptId);
+        return ResponseEntity.ok(managers);
+    }
+
+    @GetMapping("/projects/{deptId}")
+    public ResponseEntity<List<ProjectDTO>> getProjectsByDeptId(@PathVariable Long deptId){
+        List<ProjectDTO> projects = departmentService.getProjectsByDeptId(deptId);
+        return ResponseEntity.ok(projects);
     }
 
 }
