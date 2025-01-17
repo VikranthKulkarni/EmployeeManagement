@@ -7,7 +7,10 @@ import com.virtusa.employee_service.feignClient.ProjectFeignClient;
 import com.virtusa.employee_service.feignClient.ValidationFeignClient;
 import com.virtusa.employee_service.model.Employee;
 import com.virtusa.employee_service.repository.EmployeeRepo;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,6 +27,8 @@ public class EmployeeDAO {
     private final ManagerFeignClient managerFeignClient;
     private final ProjectFeignClient projectFeignClient;
     private final ValidationFeignClient validationFeignClient;
+
+    private Logger logger = LoggerFactory.getLogger(EmployeeDAO.class);
 
 
     public EmployeeDAO(EmployeeRepo employeeRepo, DepartmentFeignClient departmentFeignClient, ManagerFeignClient managerFeignClient, ProjectFeignClient projectFeignClient, ValidationFeignClient validationFeignClient) {
@@ -135,8 +140,10 @@ public class EmployeeDAO {
     }
 
     // list of employees present in department
+//    @Retry(name = "default")
     public List<EmployeeDTO> getEmployeesByDeptId(Long deptId){
         List<Employee> employeeList = employeeRepo.findByDeptId(deptId);
+//        logger.info("method getEmployeesByDeptId is called");
         DepartmentDTO departmentDTO = departmentFeignClient.getDeptByID(deptId);
         return employeeList.stream().map(employee -> {
             EmployeeDTO employeeDTO = toDTO(employee);

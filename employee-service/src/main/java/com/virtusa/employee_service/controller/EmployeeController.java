@@ -2,6 +2,8 @@ package com.virtusa.employee_service.controller;
 
 import com.virtusa.employee_service.dto.EmployeeDTO;
 import com.virtusa.employee_service.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
 
     public EmployeeController(EmployeeService employeeService) {

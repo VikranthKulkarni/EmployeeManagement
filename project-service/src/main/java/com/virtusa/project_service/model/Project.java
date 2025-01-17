@@ -24,10 +24,10 @@ public class Project {
     @Column(nullable = false)
     private String projectDescription;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long deptId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long managerId;
 
 }

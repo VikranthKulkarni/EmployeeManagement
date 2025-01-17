@@ -33,10 +33,10 @@ public class Manager {
     @Column(nullable = false)
     private boolean status;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long deptId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long projectId;
 
 }
